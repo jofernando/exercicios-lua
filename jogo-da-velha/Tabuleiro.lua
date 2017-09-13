@@ -1,24 +1,29 @@
-tabuleiro = { {" "," "," "}, {" "," "," "}, {" "," "," "} }
+tabuleiro = { {}, {}, {} }
 function tabuleiro:instanciar()
 	local novo = {}
 	setmetatable(novo, {__index = tabuleiro})
+	for i=1,3 do
+		for i2=1,3 do
+			novo[i][i2] = " "
+		end
+	end
 	return novo
 end
 
-function tabuleiro:jogada(linha, coluna, j)
+function tabuleiro:jogada(linha, coluna, jogador)
 	if (linha >= 1 and linha <= 3) and (coluna >= 1 and coluna <=3) and (self[linha][coluna] == " ") then
-		self[linha][coluna] = j.simbolo
+		self[linha][coluna] = jogador.simbolo
 		return true
 	else
-		print("Jogada invalida, informe uma posição válida")
+		print("A linha "..linha.." com a coluna "..coluna.." não é uma posição válida, informe uma posição válida")
 		return false
 	end
 end
 
 function tabuleiro:terminou()
 	for i = 1, 3 do
-		for j = 1, 3 do
-			if self[i][j] == " " then
+		for i2 = 1, 3 do
+			if self[i][i2] == " " then
 				return false
 			end
 		end
@@ -54,9 +59,9 @@ function tabuleiro:ganhou()
 		return true
 	end
 	if (self[1][3] == self[2][2]) and (self[2][2] == self[3][1]) and (self[2][2] ~= " ") then
-		self[1][3] = "\/"
-		self[2][2] = "\/"
-		self[3][1] = "\/"
+		self[1][3] = "/"
+		self[2][2] = "/"
+		self[3][1] = "/"
 		return true
 	end
 	return false

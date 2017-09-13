@@ -1,14 +1,15 @@
-v = require("tabuleiro")
-j = require("jogador")
+tabuleiroR = require("tabuleiro")
+jogadorR = require("jogador")
 
-jogo = {tabuleiro = v:instanciar(), jogador1 = j:instanciar(), jogador2 = j:instanciar(), jogadorAtual = j:instanciar()}
-jogo.jogador1.simbolo = "O"
-jogo.jogador2.simbolo = "X"
-jogo.jogadorAtual.simbolo = "O"
+jogo = {tabuleiro, jogador1, jogador2, jogadorAtual}
 
 function jogo:instanciar()
 	local novo = {}
 	setmetatable(novo, {__index = jogo})
+	novo.tabuleiro = tabuleiroR:instanciar()
+	novo.jogador1 = jogadorR:instanciar("O")
+	novo.jogador2 = jogadorR:instanciar("X")
+	novo.jogadorAtual = jogadorR:instanciar("O")
 	return novo
 end
 
@@ -43,7 +44,6 @@ end
 ]]
 
 function jogo:jogar()
-	--local cont = true
 	while true do
 		print("Vez do jogador " .. self.jogadorAtual.simbolo)
 		print("Linha")
@@ -71,7 +71,7 @@ function jogo:jogar()
 				self:alternarJogador()
 			end
 		end
-end
+	end
 end
 
 return jogo
