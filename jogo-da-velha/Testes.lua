@@ -2,6 +2,21 @@ luaunit = require('luaunit')
 tabuleiroR = require('tabuleiro')
 jogadorR = require('jogador')
 jogadorR.simbolo = "X"
+jogoR = require("jogo")
+
+function testeAlternarJogadorX()
+	local jogo = jogoR:instanciar()
+	jogo.jogadorAtual.simbolo = "X"
+	jogo:alternarJogador()
+	luaunit.assertEquals(jogo.jogadorAtual.simbolo, "O")
+end
+
+function testeAlternarJogadorO()
+	local jogo = jogoR:instanciar()
+	jogo.jogadorAtual.simbolo = "O"
+	jogo:alternarJogador()
+	luaunit.assertEquals(jogo.jogadorAtual.simbolo, "X")
+end
 
 function testeJogadaValida()
 	local tabuleiro = tabuleiroR:instanciar()
