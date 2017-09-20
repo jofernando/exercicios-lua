@@ -1,8 +1,8 @@
 luaunit = require('luaunit')
-tabuleiroR = require('tabuleiro')
-jogadorR = require('jogador')
+tabuleiroR = require('Tabuleiro')
+jogadorR = require('Jogador')
 jogadorR.simbolo = "X"
-jogoR = require("jogo")
+jogoR = require('Jogo')
 
 function testeAlternarJogadorX()
 	local jogo = jogoR:instanciar()
