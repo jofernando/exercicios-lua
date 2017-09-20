@@ -1,8 +1,8 @@
-luaunit = require('luaunit')
-tabuleiroR = require('Tabuleiro')
-jogadorR = require('Jogador')
+luaunit = require("luaunit")
+tabuleiroR = require("Tabuleiro")
+jogadorR = require("Jogador")
 jogadorR.simbolo = "X"
-jogoR = require('Jogo')
+jogoR = require("Jogo")
 
 function testeAlternarJogadorX()
 	local jogo = jogoR:instanciar()
@@ -51,6 +51,33 @@ function testeTerminouOhJogo()
 		end
 	end
 	luaunit.assertEquals(tabuleiro:terminou(), true)
+end
+
+function testeVenceuOhJogoLinha()
+	local jogador = jogadorR:instanciar()
+	for i=1,3 do
+	  local tabuleiro = tabuleiroR:instanciar()
+	  tabuleiro:jogada(i, 1, jogador)
+	  tabuleiro:jogada(i, 2, jogador)
+	  tabuleiro:jogada(i, 3, jogador)
+	  luaunit.assertEquals(tabuleiro:ganhou(), true)
+	end
+end
+
+function testeVenceuOhJogoColuna()
+	local jogador = jogadorR:instanciar()
+	for i=1,3 do
+	  local tabuleiro = tabuleiroR:instanciar()
+	  tabuleiro:jogada(1, i, jogador)
+	  tabuleiro:jogada(2, i, jogador)
+	  tabuleiro:jogada(3, i, jogador)
+	  luaunit.assertEquals(tabuleiro:ganhou(), true)
+	end
+end
+
+function testeNinguemVenceu()
+    local tabuleiro = tabuleiroR:instanciar()
+    luaunit.assertEquals(tabuleiro:ganhou(), false)
 end
 
 os.exit(luaunit.LuaUnit.run())

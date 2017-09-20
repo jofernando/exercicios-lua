@@ -59,17 +59,16 @@ function jogo:jogar()
 				print()
 				print(self.tabuleiro:toString())
 				break
-			end
-			if self.tabuleiro:terminou() then
-				if self.tabuleiro:ganhou() ~= false then
-					print("Empate")
-					print()
-					print(self.tabuleiro:toString())
-					break
-				end
+	      	elseif self.tabuleiro:terminou() == true and self.tabuleiro:ganhou() ~= false then
+				print("Empate")
+				print()
+				print(self.tabuleiro:toString())
+				break
 			else
 				self:alternarJogador()
 			end
+		else
+			print("A linha ".. l .." com a coluna ".. c .." não é uma posição válida, informe uma posição válida")
 		end
 	end
 end

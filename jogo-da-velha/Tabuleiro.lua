@@ -15,7 +15,6 @@ function tabuleiro:jogada(linha, coluna, jogador)
 		self[linha][coluna] = jogador.simbolo
 		return true
 	else
-		print("A linha "..linha.." com a coluna "..coluna.." não é uma posição válida, informe uma posição válida")
 		return false
 	end
 end
@@ -33,18 +32,16 @@ end
 
 function tabuleiro:ganhou()
 	for i = 1, 3 do
-		if ((self[i][1] == self[i][2]) and (self[i][2] == self[i][3])) and self[i][1] ~= " " then
+		if ((self[i][1] == self[i][2]) and (self[i][2] == self[i][3])) and (self[i][1] ~= " ") then
 			self[i][1] = "-"
 			self[i][2] = "-"
 			self[i][3] = "-"
 			return true
-		else
-			return false
 		end
 	end
 
 	for i = 1, 3 do
-		if ((self[1][i] == self[2][i]) and (self[2][i] == self[3][i])) and self[1][i] ~= " " then
+		if ((self[1][i] == self[2][i]) and (self[2][i] == self[3][i])) and (self[1][i] ~= " ") then
 			self[1][i] = "|"
 			self[2][i] = "|"
 			self[3][i] = "|"
