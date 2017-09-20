@@ -1,5 +1,5 @@
-tabuleiroR = require("tabuleiro")
-jogadorR = require("jogador")
+tabuleiroR = require("Tabuleiro")
+jogadorR = require("Jogador")
 
 jogo = {tabuleiro, jogador1, jogador2, jogadorAtual}
 
