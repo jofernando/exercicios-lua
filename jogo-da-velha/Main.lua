@@ -1,3 +1,3 @@
-local j = require("jogo")
+local j = require("Jogo")
 local joguinho = j:instanciar()
 joguinho:jogar()
