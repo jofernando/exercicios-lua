@@ -25,14 +25,31 @@ function tabuleiro:toString()
 	print(str)
 end
 
-function tabuleiro:jogada(linha, coluna, jogador)
-	if (linha >= 1 and linha <= 10) and (coluna >= 1 and coluna <=10) and (self[linha][coluna] == "~") then
-		self[linha][coluna] = jogador.simbolo
-		return true
+function tabuleiro:posicionarNavio(navio, linha, coluna, direcao)
+	if (linha >= 1 and linha <= 10) and (coluna >= 1 and coluna <= 10) then
+		if (direcao == 1) and (linha - navio.comprimento >= 1) then
+			for i=1, navio.comprimento do
+				self[linha-1+i][coluna] = "X"
+			end
+			return true
+		elseif (direcao == 2) and (linha + navio.comprimento <= 10) then
+			for i=1, navio.comprimento do
+				self[linha+1-i][coluna] = "X"
+			end
+			return true
+		elseif (direcao == 3) and (coluna - navio.comprimento >= 0) then
+			for i=1, navio.comprimento do
+				self[linha][coluna+1-i] = "X"
+			end
+			return true
+		elseif (direcao == 4) and (coluna + navio.comprimento <= 10) then
+			for i=1, navio.comprimento do
+				self[linha][coluna-1+i] = "X"
+			end
+			return true
+		end
 	end
 	return false
 end
 
-tab = tabuleiro:instanciar()
-tab:toString()
 return tabuleiro
