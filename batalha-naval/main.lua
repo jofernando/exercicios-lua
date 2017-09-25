@@ -52,6 +52,7 @@ while true do
 		if tab:posicionarNavio(ship, linha, coluna, direcao) then
 			cont = cont + 1
 			tab:toString()
+			break;
 		else
 			print()
 			print("Jogada inválida tente novamento")
