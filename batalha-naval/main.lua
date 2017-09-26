@@ -1,7 +1,7 @@
 require("Navio")
-require("Tabuleiro")
+require("Jogador")
 
-tab = tabuleiro:instanciar()
+player = jogador:instanciar()
 cont = 1
 while true do
 	if cont == 1 then
@@ -14,9 +14,9 @@ while true do
 		local coluna = io.read("*number")
 		print("Escolha a direção. Opções:\ncima = 1\nbaixo = 2\nesquerda = 3\ndireita = 4")
 		local direcao = io.read("*number")
-		if tab:posicionarNavio(ship, linha, coluna, direcao) then
+		if player.tabuleiro:posicionarNavio(ship, linha, coluna, direcao) then
 			cont = cont + 1
-			tab:toString()
+			player.tabuleiro:toString()
 		else
 			print()
 			print("Jogada inválida tente novamento")
@@ -31,9 +31,9 @@ while true do
 		local coluna = io.read("*number")
 		print("Escolha a direção. Opções:\ncima = 1\nbaixo = 2\nesquerda = 3\ndireita = 4")
 		local direcao = io.read("*number")
-		if tab:posicionarNavio(ship, linha, coluna, direcao) then
+		if player.tabuleiro:posicionarNavio(ship, linha, coluna, direcao) then
 			cont = cont + 1
-			tab:toString()
+			player.tabuleiro:toString()
 		else
 			print()
 			print("Jogada inválida tente novamento")
@@ -49,9 +49,9 @@ while true do
 		local coluna = io.read("*number")
 		print("Escolha a direção. Opções:\ncima = 1\nbaixo = 2\nesquerda = 3\ndireita = 4")
 		local direcao = io.read("*number")
-		if tab:posicionarNavio(ship, linha, coluna, direcao) then
+		if player.tabuleiro:posicionarNavio(ship, linha, coluna, direcao) then
 			cont = cont + 1
-			tab:toString()
+			player.tabuleiro:toString()
 			break;
 		else
 			print()
@@ -60,3 +60,6 @@ while true do
 		end
 	end
 end
+
+player:pegarNavios()
+player:mostrarPosicaoNavios()
