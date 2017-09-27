@@ -1,5 +1,5 @@
 require("Tabuleiro")
-jogador = {tabuleiro, navios, nome}
+jogador = {tabuleiro , navios, nome}
 function jogador:instanciar(nome)
 	local novo = {}
 	setmetatable(novo, {__index = jogador})
@@ -10,12 +10,12 @@ function jogador:instanciar(nome)
 end
 
 function jogador:pegarNavios()
-	local cont = 1
+	local index = 1
 	for i=1,10 do
 		for i2=1,10 do
 			if self.tabuleiro[i][i2] == "X" then
-				self.navios[cont] = {i, i2}
-				cont = cont + 1
+				self.navios[index] = {i, i2}
+				index = index + 1
 			end
 		end
 	end
@@ -36,6 +36,15 @@ function jogador:atirar(linha, coluna)
 		end
 	end
 	return false
+end
+
+function jogador:perdeu()
+	for i,v in ipairs(self) do
+		if v ~= "" then
+			return false
+		end
+	end
+	return true
 end
 
 return jogador

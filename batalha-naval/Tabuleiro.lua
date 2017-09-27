@@ -12,13 +12,13 @@ end
 
 function tabuleiro:toString()
 	str = "   1 2 3 4 5 6 7 8 9 10 \n"
-	for i,v in ipairs(tabuleiro) do
+	for i=1,10 do
 		if i < 10 then 
 			str = str .. " "
 		end
 		str = str .. i
-		for i2,v2 in ipairs(tabuleiro[i]) do
-			str = str.." ".. v2
+		for i2=1,10 do
+			str = str.." ".. self[i][i2]
 		end
 		str = str .. "\n"
 	end
@@ -69,7 +69,5 @@ function tabuleiro:verificaPosicaoValidaParaPosicionarNavio(navio, linha, coluna
 	end
 	return true
 end
-
-
 
 return tabuleiro
