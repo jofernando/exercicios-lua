@@ -1,5 +1,6 @@
 require("Jogador")
 require("Navio")
+require("Tabuleiro")
 jogo = {jogador1, jogador2}
 
 function jogo:instanciar(nome1, nome2)
@@ -12,6 +13,8 @@ end
 
 function jogo:jogar()
 	for k,v in pairs(self) do
+		self.jogador1.tabuleiro = tabuleiro:instanciar()
+		self.jogador2.tabuleiro = tabuleiro:instanciar()
 		local i = 1
 		print(v.nome .." faça sua jogada")
 		while i <= 4 do
