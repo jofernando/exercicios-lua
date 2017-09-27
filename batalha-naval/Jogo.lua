@@ -13,8 +13,6 @@ end
 
 function jogo:jogar()
 	for k,v in pairs(self) do
-		self.jogador1.tabuleiro = tabuleiro:instanciar()
-		self.jogador2.tabuleiro = tabuleiro:instanciar()
 		local i = 1
 		print(v.nome .." faça sua jogada")
 		while i <= 4 do
@@ -36,129 +34,10 @@ function jogo:jogar()
 				print()
 			end
 		end
-		print("Limpar tela?\n1=sim\n2=não")
+		self[k]:pegarNavios()
+		--[[print("Limpar tela?\n1=sim\n2=não")
 		if io.read("*number") == 1 then
 			os.execute("cls")
-		end
+		end]]
 	end
 end
-
-joguinho = jogo:instanciar("Mario", "Don")
-joguinho:jogar()
---[[
-	while true do
-		if cont == 1 then
-			local ship = navio:instanciar(1,1)
-			print("Posicionar um navio 1x1")
-			print("=======================")
-			print("Escolha a linha")
-			local linha = io.read("*number")
-			print("Escolha a coluna")
-			local coluna = io.read("*number")
-			print("Escolha a direção. Opções:\ncima = 1\nbaixo = 2\nesquerda = 3\ndireita = 4")
-			local direcao = io.read("*number")
-			if self.jogador1.tabuleiro:posicionarNavio(ship, linha, coluna, direcao) then
-				cont = cont + 1
-				self.jogador1.tabuleiro:toString()
-			else
-				print()
-				print("Jogada inválida tente novamento")
-				print()
-			end
-		elseif cont == 2 then
-			local ship = navio:instanciar(2,1)
-			print("Posicionar um navio 2x1")
-			print("=======================")
-			local linha = io.read("*number")
-			print("Escolha a coluna")
-			local coluna = io.read("*number")
-			print("Escolha a direção. Opções:\ncima = 1\nbaixo = 2\nesquerda = 3\ndireita = 4")
-			local direcao = io.read("*number")
-			if self.jogador1.tabuleiro:posicionarNavio(ship, linha, coluna, direcao) then
-				cont = cont + 1
-				self.jogador1.tabuleiro:toString()
-			else
-				print()
-				print("Jogada inválida tente novamento")
-				print()
-			end
-		elseif cont == 3 then
-			local ship = navio:instanciar(4,1)
-			print("Posicionar um navio 4x1")
-			print("=======================")
-			print("Escolha a linha")
-			local linha = io.read("*number")
-			print("Escolha a coluna")
-			local coluna = io.read("*number")
-			print("Escolha a direção. Opções:\ncima = 1\nbaixo = 2\nesquerda = 3\ndireita = 4")
-			local direcao = io.read("*number")
-			if self.jogador1.tabuleiro:posicionarNavio(ship, linha, coluna, direcao) then
-				cont = cont + 1
-				self.jogador1.tabuleiro:toString()
-				break;
-			else
-				print()
-				print("Jogada inválida tente novamento")
-				print()
-			end
-		end
-	end
-
-	while true do
-		if cont == 1 then
-			local ship = navio:instanciar(1,1)
-			print("Posicionar um navio 1x1")
-			print("=======================")
-			print("Escolha a linha")
-			local linha = io.read("*number")
-			print("Escolha a coluna")
-			local coluna = io.read("*number")
-			print("Escolha a direção. Opções:\ncima = 1\nbaixo = 2\nesquerda = 3\ndireita = 4")
-			local direcao = io.read("*number")
-			if self.jogador2.tabuleiro:posicionarNavio(ship, linha, coluna, direcao) then
-				cont = cont + 1
-				self.jogador2.tabuleiro:toString()
-			else
-				print()
-				print("Jogada inválida tente novamento")
-				print()
-			end
-		elseif cont == 2 then
-			local ship = navio:instanciar(2,1)
-			print("Posicionar um navio 2x1")
-			print("=======================")
-			local linha = io.read("*number")
-			print("Escolha a coluna")
-			local coluna = io.read("*number")
-			print("Escolha a direção. Opções:\ncima = 1\nbaixo = 2\nesquerda = 3\ndireita = 4")
-			local direcao = io.read("*number")
-			if self.jogador2.tabuleiro:posicionarNavio(ship, linha, coluna, direcao) then
-				cont = cont + 1
-				self.jogador2.tabuleiro:toString()
-			else
-				print()
-				print("Jogada inválida tente novamento")
-				print()
-			end
-		elseif cont == 3 then
-			local ship = navio:instanciar(4,1)
-			print("Posicionar um navio 4x1")
-			print("=======================")
-			print("Escolha a linha")
-			local linha = io.read("*number")
-			print("Escolha a coluna")
-			local coluna = io.read("*number")
-			print("Escolha a direção. Opções:\ncima = 1\nbaixo = 2\nesquerda = 3\ndireita = 4")
-			local direcao = io.read("*number")
-			if self.jogador2.tabuleiro:posicionarNavio(ship, linha, coluna, direcao) then
-				cont = cont + 1
-				self.jogador2.tabuleiro:toString()
-				break;
-			else
-				print()
-				print("Jogada inválida tente novamento")
-				print()
-			end
-		end
-	end
-end]]
