@@ -70,4 +70,6 @@ function tabuleiro:verificaPosicaoValidaParaPosicionarNavio(navio, linha, coluna
 	return true
 end
 
+
+
 return tabuleiro

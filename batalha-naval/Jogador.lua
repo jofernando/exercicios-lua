@@ -27,7 +27,7 @@ function jogador:mostrarPosicaoNavios()
 	end
 end
 
-function jogador:atirarNoTabuleiroDesseJogador(linha, coluna)
+function jogador:atirar(linha, coluna)
 	for i,v in ipairs(self.navios) do
 		if self.navios[i][1] == linha and self.navios[i][2] == coluna then
 			self.navios[i][1] = ""
