@@ -13,6 +13,8 @@ end
 
 function jogo:jogar()
 	for k,v in pairs(self) do
+		
+		print(self[k].tabuleiro[1][1])
 		local i = 1
 		print(v.nome .." faça sua jogada")
 		while i <= 4 do
@@ -24,9 +26,9 @@ function jogo:jogar()
 			local coluna = io.read("*number")
 			print("Escolha a direção. Opções:\ncima = 1\nbaixo = 2\nesquerda = 3\ndireita = 4")
 			local direcao = io.read("*number")
+
 			if self[k].tabuleiro:posicionarNavio(ship, linha, coluna, direcao) then
-				self.jogador1.tabuleiro:toString()
-				self.jogador2.tabuleiro:toString()
+				self[k].tabuleiro:toString()
 				i = i * 2
 			else
 				print()
@@ -35,9 +37,9 @@ function jogo:jogar()
 			end
 		end
 		self[k]:pegarNavios()
-		--[[print("Limpar tela?\n1=sim\n2=não")
+		print("Limpar tela?\n1=sim\n2=não")
 		if io.read("*number") == 1 then
 			os.execute("cls")
-		end]]
+		end
 	end
 end
