@@ -1,4 +1,4 @@
-tabuleiro = {nil,nil,nil,nil,nil,nil,nil,nil,nil,nil}
+tabuleiro = {}
 function tabuleiro:instanciar()
 	local novo = {{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}
 	setmetatable(novo, {__index = tabuleiro})
@@ -26,8 +26,8 @@ function tabuleiro:toString()
 end
 
 function tabuleiro:posicionarNavio(navio, linha, coluna, direcao)
-	if (linha >= 1 and linha <= 10) and (coluna >= 1 and coluna <= 10) then
-		if verificaPosicaoValidaParaPosicionarNavio == false then
+	if self:verificaLinhaColuna(linha, coluna) then
+		if self:verificaPosicaoValidaParaPosicionarNavio(navio, linha, coluna, direcao) == false then
 			return false
 		end
 		if (direcao == 1) and (linha - navio.comprimento + 1 >= 1) then
@@ -55,7 +55,7 @@ function tabuleiro:posicionarNavio(navio, linha, coluna, direcao)
 	return false
 end
 
-function tabuleiro:verificaPosicao(linha, coluna)
+function tabuleiro:verificaLinhaColuna(linha, coluna)
 	if (linha >= 1 and linha <= 10) and (coluna >= 1 and coluna <= 10) then
 		return true
 	end

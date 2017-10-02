@@ -11,10 +11,8 @@ function jogo:instanciar(nome1, nome2)
 	return novo
 end
 
-function jogo:jogar()
+function jogo:posicionarNavios()
 	for k,v in pairs(self) do
-		
-		print(self[k].tabuleiro[1][1])
 		local i = 1
 		print(v.nome .." faça sua jogada")
 		while i <= 4 do
@@ -37,9 +35,36 @@ function jogo:jogar()
 			end
 		end
 		self[k]:pegarNavios()
-		print("Limpar tela?\n1=sim\n2=não")
+		--[[print("Limpar tela?\n1=sim\n2=não")
 		if io.read("*number") == 1 then
 			os.execute("cls")
-		end
+		end]]
 	end
+end
+
+function jogo:alternarJogadores()
+	local cont = math.random(3)
+	while true do
+		local jogadorAtual = self["jogador" .. cont % 2 + 1]
+		print(jogadorAtual.nome.." faça sua jogada")
+		print("Escolha a linha")
+		local linha = io.read("*number")
+		print("Escolha a coluna")
+		local coluna = io.read("*number")
+		if self["jogador" .. (cont + 1) % 2 + 1]:atirar(linha, coluna) == false then
+			cont = cont + 1
+		end
+		if self.jogador1:perdeu() or self.jogador2:perdeu() then
+			break
+		end
+		self.jogador1:mostrarPosicoes()
+		self.jogador2:mostrarPosicoes()
+	end
+end
+
+function jogo:teste( ... )
+	local cont = math.random(3)
+	print(cont)
+	print(cont % 2 + 1)
+	print((cont+1) % 2 + 1)	
 end

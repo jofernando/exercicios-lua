@@ -21,30 +21,45 @@ function jogador:pegarNavios()
 	end
 end
 
-function jogador:mostrarPosicaoNavios()
+function jogador:mostrarPosicoes( ... )
 	for i,v in ipairs(self.posicaoNavios) do
-		print(self.posicaoNavios[i][1] .. "," .. self.posicaoNavios[i][2])
+		print(v[1]..","..v[2])
 	end
 end
 
 function jogador:atirar(linha, coluna)
-	for i,v in ipairs(self.posicaoNavios) do
-		if self.posicaoNavios[i][1] == linha and self.posicaoNavios[i][2] == coluna then
-			self.posicaoNavios[i][1] = ""
-			self.posicaoNavios[i][2] = ""
-			return true
+	if self:verificaLinhaColuna(linha, coluna) then
+		for i,v in ipairs(self.posicaoNavios) do
+			if v[1] == linha and v[2] == coluna and self.tabuleiro[linha][coluna] == "~" then
+				self.tabuleiro[linha][coluna] = "X"
+				self.posicaoNavios[i][1] = ""
+				self.posicaoNavios[i][2] = ""
+				self.tabuleiro:toString()
+				print("Acertou")
+				return true
+			end
 		end
 	end
+	self.tabuleiro[linha][coluna] = "X"
+	self.tabuleiro:toString()
+	print("Errou")
 	return false
 end
 
 function jogador:perdeu()
-	for i,v in ipairs(self) do
-		if v ~= "" then
+	for i,v in ipairs(self.posicaoNavios) do
+		if self.posicaoNavios[i][1] ~= "" or self.posicaoNavios[i][2] ~= "" then
 			return false
 		end
 	end
 	return true
+end
+
+function jogador:verificaLinhaColuna(linha, coluna)
+	if (linha >= 1 and linha <= 10) and (coluna >= 1 and coluna <= 10) then
+		return true
+	end
+	return false
 end
 
 return jogador
