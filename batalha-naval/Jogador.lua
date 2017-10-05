@@ -31,7 +31,7 @@ function jogador:atirar(linha, coluna)
 	if self:verificaLinhaColuna(linha, coluna) then
 		for i,v in ipairs(self.posicaoNavios) do
 			if v[1] == linha and v[2] == coluna and self.tabuleiro[linha][coluna] == "~" then
-				self.tabuleiro[linha][coluna] = "X"
+				self.tabuleiro[linha][coluna] = "O"
 				self.posicaoNavios[i][1] = ""
 				self.posicaoNavios[i][2] = ""
 				self.tabuleiro:toString()

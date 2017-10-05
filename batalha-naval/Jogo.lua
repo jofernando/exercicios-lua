@@ -35,6 +35,7 @@ function jogo:posicionarNavios()
 			end
 		end
 		self[k]:pegarNavios()
+		self[k].tabuleiro = tabuleiro:instanciar()
 		--[[print("Limpar tela?\n1=sim\n2=não")
 		if io.read("*number") == 1 then
 			os.execute("cls")
@@ -42,7 +43,7 @@ function jogo:posicionarNavios()
 	end
 end
 
-function jogo:alternarJogadores()
+function jogo:combate()
 	local cont = math.random(3)
 	while true do
 		local jogadorAtual = self["jogador" .. cont % 2 + 1]
@@ -53,12 +54,15 @@ function jogo:alternarJogadores()
 		local coluna = io.read("*number")
 		if self["jogador" .. (cont + 1) % 2 + 1]:atirar(linha, coluna) == false then
 			cont = cont + 1
+			--[[print("Limpar tela?\n1=sim\n2=não")
+			if io.read("*number") == 1 then
+			os.execute("cls")
+			end]]
 		end
 		if self.jogador1:perdeu() or self.jogador2:perdeu() then
+			print(jogadorAtual.nome .. " venceu")
 			break
 		end
-		self.jogador1:mostrarPosicoes()
-		self.jogador2:mostrarPosicoes()
 	end
 end
 
