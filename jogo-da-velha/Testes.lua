@@ -6,16 +6,15 @@ jogoR = require("Jogo")
 
 function testeAlternarJogadorX()
 	local jogo = jogoR:instanciar()
-	jogo.jogadorAtual.simbolo = "X"
 	jogo:alternarJogador()
-	luaunit.assertEquals(jogo.jogadorAtual.simbolo, "O")
+	luaunit.assertEquals(jogo.jogadorAtual.simbolo, "X")
 end
 
 function testeAlternarJogadorO()
 	local jogo = jogoR:instanciar()
-	jogo.jogadorAtual.simbolo = "O"
 	jogo:alternarJogador()
-	luaunit.assertEquals(jogo.jogadorAtual.simbolo, "X")
+	jogo:alternarJogador()
+	luaunit.assertEquals(jogo.jogadorAtual.simbolo, "O")
 end
 
 function testeJogadaValida()

@@ -11,7 +11,7 @@ function tabuleiro:instanciar()
 end
 
 function tabuleiro:jogada(linha, coluna, jogador)
-	if (linha >= 1 and linha <= 3) and (coluna >= 1 and coluna <=3) and (self[linha][coluna] == " ") then
+	if --[[(linha >= 1 and linha <= 3) and (coluna >= 1 and coluna <=3) and]] (self[linha][coluna] == " ") then
 		self[linha][coluna] = jogador.simbolo
 		return true
 	else

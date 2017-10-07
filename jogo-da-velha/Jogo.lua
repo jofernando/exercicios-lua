@@ -9,7 +9,7 @@ function jogo:instanciar()
 	novo.tabuleiro = tabuleiroR:instanciar()
 	novo.jogador1 = jogadorR:instanciar("O")
 	novo.jogador2 = jogadorR:instanciar("X")
-	novo.jogadorAtual = jogadorR:instanciar("O")
+	novo.jogadorAtual = novo.jogador1
 	return novo
 end
 
@@ -47,19 +47,20 @@ function jogo:jogar()
 	while true do
 		print("Vez do jogador " .. self.jogadorAtual.simbolo)
 		print("Linha")
-		local l = io.read("*number")
+		local l = pedirNumero(1, 3)
 		print("Coluna")
-		local c = io.read("*number")
+		local c = pedirNumero(1, 3)
 		print()
 		if self.tabuleiro:jogada(l, c, self.jogadorAtual) then
 			print(self.tabuleiro:toString())
 			print()
 			if self.tabuleiro:ganhou() == true then
-				print(self.jogadorAtual.simbolo .. " venceu")
+				self.jogadorAtual.pontuacao = self.jogadorAtual.pontuacao + 1
+				print(self.jogadorAtual.simbolo .. " venceu, " .. self.jogadorAtual.pontuacao .. " pontos")
 				print()
 				print(self.tabuleiro:toString())
 				break
-	      	elseif self.tabuleiro:terminou() == true and self.tabuleiro:ganhou() ~= false then
+	      	elseif self.tabuleiro:terminou() then
 				print("Empate")
 				print()
 				print(self.tabuleiro:toString())
@@ -69,6 +70,18 @@ function jogo:jogar()
 			end
 		else
 			print("A linha ".. l .." com a coluna ".. c .." não é uma posição válida, informe uma posição válida")
+		end
+	end
+end
+
+function pedirNumero(min, max)
+	while true do
+		numero = io.read()
+		numero = tonumber(numero)
+		if numero ~= nil and (numero >= min and numero <= max) then
+			return numero
+		else
+			print("Número inávalido, digite novamente")
 		end
 	end
 end
