@@ -16,16 +16,7 @@ function jogo:posicionarNavios()
 		local i = 1
 		print(v.nome .." faça sua jogada")
 		while i <= 4 do
-			local ship = navio:instanciar(i,1)
-			print("Posicione um navio "..i.."x1")
-			print("Escolha a linha")
-			local linha = io.read("*number")
-			print("Escolha a coluna")
-			local coluna = io.read("*number")
-			print("Escolha a direção. Opções:\ncima = 1\nbaixo = 2\nesquerda = 3\ndireita = 4")
-			local direcao = io.read("*number")
-
-			if self[k].tabuleiro:posicionarNavio(ship, linha, coluna, direcao) then
+			if self:posicionarNavio(i, k) then
 				self[k].tabuleiro:toString()
 				i = i * 2
 			else
@@ -43,15 +34,27 @@ function jogo:posicionarNavios()
 	end
 end
 
+function jogo:posicionarNavio(i, k)
+	local ship = navio:instanciar(i,1)
+	print("Posicione um navio "..i.."x1")
+	print("Escolha a linha")
+	local linha = pedirNumero(1, 10)
+	print("Escolha a coluna")
+	local coluna = pedirNumero(1, 10)
+	print("Escolha a direção. Opções:\ncima = 1\nbaixo = 2\nesquerda = 3\ndireita = 4")
+	local direcao = pedirNumero(1, 4)
+	return self[k].tabuleiro:posicionarNavio(ship, linha, coluna, direcao)
+end
+
 function jogo:combate()
-	local cont = math.random(3)
+	local cont = math.random(2)
 	while true do
 		local jogadorAtual = self["jogador" .. cont % 2 + 1]
 		print(jogadorAtual.nome.." faça sua jogada")
 		print("Escolha a linha")
-		local linha = io.read("*number")
+		local linha = pedirNumero(1, 10)
 		print("Escolha a coluna")
-		local coluna = io.read("*number")
+		local coluna = pedirNumero(1, 10)
 		if self["jogador" .. (cont + 1) % 2 + 1]:atirar(linha, coluna) == false then
 			cont = cont + 1
 			--[[print("Limpar tela?\n1=sim\n2=não")
@@ -59,16 +62,28 @@ function jogo:combate()
 			os.execute("cls")
 			end]]
 		end
-		if self.jogador1:perdeu() or self.jogador2:perdeu() then
-			print(jogadorAtual.nome .. " venceu")
+		if self:venceu(jogadorAtual) then
 			break
 		end
 	end
 end
 
-function jogo:teste( ... )
-	local cont = math.random(3)
-	print(cont)
-	print(cont % 2 + 1)
-	print((cont+1) % 2 + 1)	
+function jogo:venceu(jogadorAtual)
+	if self.jogador1:perdeu() or self.jogador2:perdeu() then
+		print(jogadorAtual.nome .. " venceu")
+		return true
+	end
+	return false
+end
+
+function pedirNumero(min, max)
+	while true do
+		numero = io.read()
+		numero = tonumber(numero)
+		if numero ~= nil and (numero >= min and numero <= max) then
+			return numero
+		else 
+			print("Número inávalido, digite novamente")
+		end
+	end
 end

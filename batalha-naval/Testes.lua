@@ -14,7 +14,7 @@ function testeDeveInstanciarTabuleiro()
 		end
 	end
 end
-
+--[[
 function testeDeveVerificarLinhaColunaCorretoDoTabuleiro()
 	local tabuleiro = tabuleiro:instanciar()
 	for i=1,10 do
@@ -32,7 +32,7 @@ end
 function testeDeveVerificarColunaIncorretoDoTabuleiro()
 	local tabuleiro = tabuleiro:instanciar()
 	luaunit.assertFalse(tabuleiro:verificaLinhaColuna(0,-2))
-end
+end]]
 
 function testeDeveVerificarPosicaoJaMarcada()
 	local tabuleiro = tabuleiro:instanciar()
@@ -88,8 +88,8 @@ end
 function testeDeveVerificarPerdeu( ... )
 	local jogador = jogador:instanciar()
 	for i,v in ipairs(jogador.posicaoNavios) do
-		for i,v in ipairs(v) do
-			v = ""
+		for i2,v2 in ipairs(v) do
+			v2 = ""
 		end
 	end
 	luaunit.assertTrue(jogador:perdeu())
@@ -114,7 +114,7 @@ function testeDeveAtirar( ... )
 	luaunit.assertFalse(jogador:atirar(1,2))
 	luaunit.assertFalse(jogador:atirar(1,1))
 end
-
+--[[
 function testeDeveVerificarLinhaColunaCorretoDoJogador()
 	local jogador = jogador:instanciar()
 	for i=1,10 do
@@ -133,7 +133,7 @@ function testeDeveVerificarColunaIncorretoDoJogador()
 	local jogador = jogador:instanciar()
 	luaunit.assertFalse(jogador:verificaLinhaColuna(0,-2))
 end
-
+]]
 
 
 os.exit(luaunit.LuaUnit.run())

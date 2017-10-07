@@ -28,7 +28,7 @@ function jogador:mostrarPosicoes( ... )
 end
 
 function jogador:atirar(linha, coluna)
-	if self:verificaLinhaColuna(linha, coluna) then
+	--if self:verificaLinhaColuna(linha, coluna) then
 		for i,v in ipairs(self.posicaoNavios) do
 			if v[1] == linha and v[2] == coluna and self.tabuleiro[linha][coluna] == "~" then
 				self.tabuleiro[linha][coluna] = "O"
@@ -39,7 +39,7 @@ function jogador:atirar(linha, coluna)
 				return true
 			end
 		end
-	end
+	--end
 	self.tabuleiro[linha][coluna] = "X"
 	self.tabuleiro:toString()
 	print("Errou")
@@ -48,18 +48,20 @@ end
 
 function jogador:perdeu()
 	for i,v in ipairs(self.posicaoNavios) do
-		if self.posicaoNavios[i][1] ~= "" or self.posicaoNavios[i][2] ~= "" then
-			return false
+		for i2,v2 in ipairs(v) do
+			if v2 ~= "" then
+				return false
+			end
 		end
 	end
 	return true
 end
-
+--[[
 function jogador:verificaLinhaColuna(linha, coluna)
 	if (linha >= 1 and linha <= 10) and (coluna >= 1 and coluna <= 10) then
 		return true
 	end
 	return false
-end
+end]]
 
 return jogador
