@@ -1,11 +1,12 @@
 require("Tabuleiro")
-jogador = {tabuleiro , posicaoNavios, nome}
+jogador = {tabuleiro , posicaoNavios, nome, pontuacao}
 function jogador:instanciar(nome)
 	local novo = {}
 	setmetatable(novo, {__index = jogador})
 	novo.tabuleiro = tabuleiro:instanciar()
 	novo.nome = nome
 	novo.posicaoNavios = {{},{},{},{},{},{},{}}
+	novo.pontuacao = 0
 	return novo
 end
 
@@ -28,18 +29,20 @@ function jogador:mostrarPosicoes( ... )
 end
 
 function jogador:atirar(linha, coluna)
-	--if self:verificaLinhaColuna(linha, coluna) then
-		for i,v in ipairs(self.posicaoNavios) do
-			if v[1] == linha and v[2] == coluna and self.tabuleiro[linha][coluna] == "~" then
-				self.tabuleiro[linha][coluna] = "O"
-				self.posicaoNavios[i][1] = ""
-				self.posicaoNavios[i][2] = ""
-				self.tabuleiro:toString()
-				print("Acertou")
-				return true
-			end
+	if self.[linha][coluna] == "O" then
+		print("Navio nessa posição já foi afundado, jogue novamente")
+		return true
+	end
+	for i,v in ipairs(self.posicaoNavios) do
+		if v[1] == linha and v[2] == coluna and self.tabuleiro[linha][coluna] == "~" then
+			self.tabuleiro[linha][coluna] = "O"
+			self.posicaoNavios[i][1] = ""
+			self.posicaoNavios[i][2] = ""
+			self.tabuleiro:toString()
+			print("Acertou")
+			return true
 		end
-	--end
+	end
 	self.tabuleiro[linha][coluna] = "X"
 	self.tabuleiro:toString()
 	print("Errou")
@@ -56,12 +59,17 @@ function jogador:perdeu()
 	end
 	return true
 end
---[[
-function jogador:verificaLinhaColuna(linha, coluna)
-	if (linha >= 1 and linha <= 10) and (coluna >= 1 and coluna <= 10) then
-		return true
+
+function jogador:naviosEmJogo()
+	local cont = 0
+	for i,v in ipairs(self.posicaoNavios) do
+		for i2,v2 in ipairs(v) do
+			if v2 ~= "" then
+				cont = cont +1
+			end
+		end
 	end
-	return false
-end]]
+	return cont/2
+end
 
 return jogador

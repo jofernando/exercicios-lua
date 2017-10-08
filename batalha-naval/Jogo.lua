@@ -49,12 +49,18 @@ end
 function jogo:combate()
 	local cont = math.random(2)
 	while true do
+		--[[Obs.: como os atributos de jogo são jogador1 ou jogador2 e o modulo de algum número
+		é 0 ou 1 adiciona o 1 para ficar 1 ou 2]]
+		print(self.jogador1.nome.." tem "..self.jogador1:naviosEmJogo().." navios em jogo")
+		print(self.jogador2.nome.." tem "..self.jogador2:naviosEmJogo().." navios em jogo")
 		local jogadorAtual = self["jogador" .. cont % 2 + 1]
 		print(jogadorAtual.nome.." faça sua jogada")
 		print("Escolha a linha")
 		local linha = pedirNumero(1, 10)
 		print("Escolha a coluna")
 		local coluna = pedirNumero(1, 10)
+		--[[Obs.: um jogador atira no tabuleiro de outro jogador, por isso o (cont+1) e não 
+		só o cont como o de cima]]
 		if self["jogador" .. (cont + 1) % 2 + 1]:atirar(linha, coluna) == false then
 			cont = cont + 1
 			--[[print("Limpar tela?\n1=sim\n2=não")
@@ -71,6 +77,7 @@ end
 function jogo:venceu(jogadorAtual)
 	if self.jogador1:perdeu() or self.jogador2:perdeu() then
 		print(jogadorAtual.nome .. " venceu")
+		jogadorAtual.pontuacao = jogadorAtual.pontuacao + 1
 		return true
 	end
 	return false

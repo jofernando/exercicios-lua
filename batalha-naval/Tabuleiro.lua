@@ -26,7 +26,7 @@ function tabuleiro:toString()
 end
 
 function tabuleiro:posicionarNavio(navio, linha, coluna, direcao)
-	if --[[self:verificaLinhaColuna(linha, coluna) and]] self:verificaPosicaoValidaParaPosicionarNavio(navio, linha, coluna, direcao) then
+	if self:verificaPosicaoValidaParaPosicionarNavio(navio, linha, coluna, direcao) then
 		if (direcao == 1) and (linha - navio.comprimento + 1 >= 1) then
 			for i=1, navio.comprimento do
 				self[linha+1-i][coluna] = "X"
@@ -51,13 +51,6 @@ function tabuleiro:posicionarNavio(navio, linha, coluna, direcao)
 	end
 	return false
 end
---[[
-function tabuleiro:verificaLinhaColuna(linha, coluna)
-	if (linha >= 1 and linha <= 10) and (coluna >= 1 and coluna <= 10) then
-		return true
-	end
-	return false
-end]]
 
 function tabuleiro:verificaPosicaoValidaParaPosicionarNavio(navio, linha, coluna, direcao)
 	for i=1, navio.comprimento do
