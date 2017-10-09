@@ -27,10 +27,10 @@ function jogo:posicionarNavios()
 		end
 		self[k]:pegarNavios()
 		self[k].tabuleiro = tabuleiro:instanciar()
-		--[[print("Limpar tela?\n1=sim\n2=não")
+		print("Limpar tela?\n1=sim\n2=não")
 		if io.read("*number") == 1 then
 			os.execute("cls")
-		end]]
+		end
 	end
 end
 
@@ -63,10 +63,10 @@ function jogo:combate()
 		só o cont como o de cima]]
 		if self["jogador" .. (cont + 1) % 2 + 1]:atirar(linha, coluna) == false then
 			cont = cont + 1
-			--[[print("Limpar tela?\n1=sim\n2=não")
+			print("Limpar tela?\n1=sim\n2=não")
 			if io.read("*number") == 1 then
 			os.execute("cls")
-			end]]
+			end
 		end
 		if self:venceu(jogadorAtual) then
 			break
