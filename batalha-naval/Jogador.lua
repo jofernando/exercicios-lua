@@ -22,14 +22,8 @@ function jogador:pegarNavios()
 	end
 end
 
-function jogador:mostrarPosicoes( ... )
-	for i,v in ipairs(self.posicaoNavios) do
-		print(v[1]..","..v[2])
-	end
-end
-
 function jogador:atirar(linha, coluna)
-	if self.[linha][coluna] == "O" then
+	if self.tabuleiro[linha][coluna] == "O" then
 		print("Navio nessa posição já foi afundado, jogue novamente")
 		return true
 	end
